@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Register = () => {
+    const { signInWithGooglePopUp, setCurrentUser } = useContext(AuthContext)
+    const handleSignInWithGooglePopUp = () => {
+        signInWithGooglePopUp()
+            .then(result => {
+                console.log(result.user);
+                setCurrentUser(result.user)
+            })
+    }
+
     const handleOnSubmit = e => {
         e.preventDefault();
         const form = e.target;
@@ -16,7 +26,7 @@ const Register = () => {
                 <div className="card bg-base-100 w-[400px] shadow-2xl">
                     <form onSubmit={handleOnSubmit} className="card-body w-full">
                         <h2 className='font-semibold text-3xl text-center py-5'>Register Now</h2>
-                        <span className='flex items-center justify-center gap-3 btn btn-primary btn-outline'><FcGoogle /> <span>Sign up with Google</span></span>
+                        <span onClick={handleSignInWithGooglePopUp} className='flex items-center justify-center gap-3 btn btn-primary btn-outline'><FcGoogle /> <span>Sign up with Google</span></span>
                         <div className="divider">Or continue with</div>
                         <div className="form-control my-2 ">
                             <label className="label pb-1">
