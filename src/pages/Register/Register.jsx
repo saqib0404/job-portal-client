@@ -1,15 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Register = () => {
-    const { signInWithGooglePopUp, setCurrentUser } = useContext(AuthContext)
+    const [error, setError] = useState("");
+    const { signInWithGooglePopUp, createUser,loading } = useContext(AuthContext)
     const handleSignInWithGooglePopUp = () => {
         signInWithGooglePopUp()
             .then(result => {
                 console.log(result.user);
-                setCurrentUser(result.user)
             })
     }
 
@@ -18,6 +18,16 @@ const Register = () => {
         const form = e.target;
         const email = form.email.value;
         const pass = form.password.value;
+
+        createUser(email, pass)
+            .then(result => {
+                setError("")
+                form.reset()
+                console.log(result);
+            })
+            .catch((error) => {
+                setError(error.message)
+            });
     };
 
     return (
@@ -47,7 +57,10 @@ const Register = () => {
                             <input name='password' type="password" placeholder="password" className="input focus:border-none w-full" required />
                         </div>
                         <div className="form-control mt-6">
-                            <button type='submit' className="btn btn-primary w-full">Register</button>
+                            <button type='submit' className="btn btn-primary w-full" disabled={loading && "True"}>Register {loading && <span className="loading loading-spinner loading-sm"></span>}</button>
+                            {
+                                error && <p className='text-red-700 font-normal text-lg'>{error}</p>
+                            }
                             <p className='my-2'>Already have an Account? <Link className='link link-hover' to={'/sign-in'}>Sign In</Link></p>
                         </div>
                     </form>

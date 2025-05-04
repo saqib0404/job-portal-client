@@ -1,23 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../providers/AuthProvider'
 
 const SignIn = () => {
-    const { signInWithGooglePopUp, setCurrentUser } = useContext(AuthContext)
-        const handleSignInWithGooglePopUp = () => {
-            signInWithGooglePopUp()
-                .then(result => {
-                    console.log(result.user);
-                    setCurrentUser(result.user)
-                })
-        }
+    const [error, setError] = useState("");
+    const { signInWithGooglePopUp, signInUser, loading } = useContext(AuthContext)
+    const handleSignInWithGooglePopUp = () => {
+        signInWithGooglePopUp()
+            .then(result => {
+                console.log(result.user);
+            })
+    }
 
     const handleOnSubmit = e => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const pass = form.password.value;
+        signInUser(email, pass)
+            .then(result => {
+                setError("")
+                form.reset()
+                console.log(result);
+            })
+            .catch((error) => {
+                setError(error.message)
+            });
     };
 
     return (
@@ -41,7 +50,10 @@ const SignIn = () => {
                             <input name='password' type="password" placeholder="password" className="input focus:border-none w-full" required />
                         </div>
                         <div className="form-control mt-6">
-                            <button type='submit' className="btn btn-primary w-full">Login</button>
+                            <button type='submit' className="btn btn-primary w-full" disabled={loading && "True"}>Login {loading && <span className="loading loading-spinner loading-sm"></span>}</button>
+                            {
+                                error && <p className='text-red-700 font-normal text-lg'>{error}</p>
+                            }
                             <p className='my-2'>Don't have an Account? <Link className='link link-hover' to={'/register'}>Sign up</Link></p>
                         </div>
                     </form>
