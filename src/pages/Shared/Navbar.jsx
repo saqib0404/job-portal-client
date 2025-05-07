@@ -15,10 +15,12 @@ const Navbar = () => {
     }
 
     const links = <>
-        <NavLink to="/" className="px-2">Home</NavLink>
-        <NavLink className="px-2"> Contacs</NavLink>
-        <NavLink className="px-2"> about</NavLink>
-        <NavLink className="px-2"> good</NavLink>
+        <NavLink to="/"
+            className={`px-2 ${({ isActive }) => isActive ? "active" : ""}`}
+        >Home</NavLink>
+        <NavLink to="/sign-in" className="px-2"> Contacs</NavLink>
+        <NavLink to="/asd" className="px-2"> about</NavLink>
+        <NavLink to="/gdsfgs" className="px-2"> good</NavLink>
     </>
     return (
         <div className="navbar bg-base-100">
@@ -44,12 +46,12 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost flex items-center  text-xl text-blue-600">
+                <Link to={'/'} className="btn btn-ghost flex items-center  text-xl text-blue-600">
                     <img src={logo} className='h-14' alt="" /> JobOX
-                </a>
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-1 font-semibold text-lg">
                     {links}
                 </ul>
             </div>
