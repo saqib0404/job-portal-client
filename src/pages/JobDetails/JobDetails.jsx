@@ -1,9 +1,10 @@
 import React from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 
 const JobDetails = () => {
     const jobDetail = useLoaderData();
     const {
+        _id,
         title,
         location,
         jobType,
@@ -79,7 +80,7 @@ const JobDetails = () => {
                     <span className="font-bold text-2xl">{company}</span>
                 </div>
                 <div className="space-x-4">
-                    <button className="px-6 py-3 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 text-xl">Apply Now</button>
+                    <Link to={`/job-apply/${_id}`}><button className="px-6 py-3 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 text-xl">Apply Now</button></Link>
                     <button className="px-6 py-3 rounded-md bg-gray-200 hover:bg-gray-300 text-xl">Save Job</button>
                 </div>
             </div>
