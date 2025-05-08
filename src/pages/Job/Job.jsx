@@ -1,5 +1,6 @@
 import React from 'react'
 import { Briefcase, Clock, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Job = ({ job }) => {
     const {
@@ -61,9 +62,11 @@ const Job = ({ job }) => {
                     {salaryRange?.currency === 'bdt' ? '৳' : '$'}
                     {Math.round(salaryRange.min / 160)}/Hour
                 </span>
-                <button className="bg-indigo-100 text-indigo-700 text-sm px-4 py-2 rounded-md hover:bg-indigo-200">
-                    Apply Now
-                </button>
+                <Link to={`/job/${_id}`}>
+                    <button className="bg-indigo-100 text-indigo-700 text-sm px-4 py-2 rounded-md hover:bg-indigo-200">
+                        Apply Now
+                    </button>
+                </Link>
             </div>
         </div>
     );

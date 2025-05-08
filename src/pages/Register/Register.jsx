@@ -1,15 +1,17 @@
 import React, { useContext, useState } from 'react'
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Register = () => {
     const [error, setError] = useState("");
-    const { signInWithGooglePopUp, createUser,loading } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const { signInWithGooglePopUp, createUser, loading } = useContext(AuthContext)
     const handleSignInWithGooglePopUp = () => {
         signInWithGooglePopUp()
             .then(result => {
                 console.log(result.user);
+                navigate('/')
             })
     }
 
@@ -24,6 +26,7 @@ const Register = () => {
                 setError("")
                 form.reset()
                 console.log(result);
+                navigate('/')
             })
             .catch((error) => {
                 setError(error.message)
