@@ -1,14 +1,50 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
+import Swal from 'sweetalert2';
 
 const AddJob = () => {
     const {currentUser}= useContext(AuthContext);
+    
+    const handlesubmit = e=>{
+      e.preventDefault();
+     const form = e.target;
+     const formData = new FormData(form);
+    // Convert FormData to a plain object
+     const data = Object.fromEntries(formData.entries());
+     const {min,max,currency,responsibilities,requirements, ...newJob} =data
+     newJob.salaryRange ={min,max,currency};
+     newJob.responsibilities = responsibilities.split('\n')
+     newJob.requirements = requirements.split('\n')
+     newJob.hr_email = currentUser.email
+     
+      fetch(`http://localhost:5000/jobs`,{
+        method:"POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(newJob)
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        if(data.acknowledged){
+            Swal.fire({
+                title: "Job Added",
+                icon: "success",
+              })
+        }
+        form.reset()
+        
+      })
+    
+    } 
+
+   
 
   return (
     <div>
         <h2 className='text-4xl font-semibold text-center py-10 pb-5'>Add A Job</h2>
         <div className="card bg-base-200 w-full shadow-2xl">
-      <form className="card-body">
+      <form className="card-body" onSubmit={handlesubmit}>
         {/* Company */}
         <div className="form-control">
           <label className="label">
@@ -26,7 +62,7 @@ const AddJob = () => {
         {/* Title */}
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Job Title</span>
+            <span className="label-text">Recruiter Email</span>
           </label><br />
           <div className='border-2'>
             <input type="name" name='email' disabled defaultValue={currentUser?.email} className="input input-bordered border-2 w-full" required />

@@ -10,6 +10,7 @@ import JobApply from "../pages/JobApply/JobApply";
 import JobApplications from "../pages/JobApplications/JobApplications";
 import PostedJobs from "../pages/PostedJobs/PostedJobs";
 import AddJob from "../pages/AddJob/AddJob";
+import Applicants from "../pages/Applicants/Applicants";
 
 
 
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
             {
                 path: "/posted-jobs",
                 element: <PrivateRoute><PostedJobs /></PrivateRoute>
+            },
+            {
+                path: "/posted-jobs/:job_id",
+                element: <PrivateRoute><Applicants /></PrivateRoute>
             },
             {
                 path: "/job-apply/:id",
