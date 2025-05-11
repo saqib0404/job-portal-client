@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const [error, setError] = useState("");
@@ -11,7 +12,10 @@ const Register = () => {
         signInWithGooglePopUp()
             .then(result => {
                 console.log(result.user);
-                navigate('/')
+                Swal.fire({
+                    title: "Registered New User",
+                    icon: "success",
+                }).then(navigate('/'))
             })
     }
 
@@ -26,7 +30,10 @@ const Register = () => {
                 setError("")
                 form.reset()
                 console.log(result);
-                navigate('/')
+                Swal.fire({
+                    title: "Registered New User",
+                    icon: "success",
+                }).then(navigate('/'))
             })
             .catch((error) => {
                 setError(error.message)

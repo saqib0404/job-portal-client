@@ -16,7 +16,9 @@ const Navbar = () => {
 
     const links = <>
         <NavLink to="/" className={`px-2 ${({ isActive }) => isActive ? "active" : ""}`}>Home</NavLink>
-        <NavLink to="/sign-in" className="px-2"> Contacs</NavLink>
+        {
+            currentUser && <NavLink to={`/job-applications`} className="px-2">Applications</NavLink>
+        }
         <NavLink to="/asd" className="px-2"> about</NavLink>
         <NavLink to="/gdsfgs" className="px-2"> good</NavLink>
     </>

@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext } from '../../providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const JobApply = () => {
-    // const {  } = useContext(AuthContext)
+    const { currentUser } = useContext(AuthContext);
+    const navigate = useNavigate()
     const id = useParams();
 
 
@@ -15,12 +17,26 @@ const JobApply = () => {
         const githubUrl = form.githubUrl.value;
         const applicantInfo = {
             job_id: id?.id,
+            applicantEmail: currentUser?.email,
             linkedinUrl,
             facebookUrl,
             githubUrl
         }
-        console.log(applicantInfo);
-        
+
+        fetch(`http://localhost:5000/job-apply`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(applicantInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    Swal.fire({
+                        title: "Applied Successfully",
+                        icon: "success",
+                    }).then(navigate('/job-applications'))
+                }
+            })
 
     };
 
