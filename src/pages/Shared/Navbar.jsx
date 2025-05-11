@@ -19,8 +19,8 @@ const Navbar = () => {
         {
             currentUser && <NavLink to={`/job-applications`} className="px-2">Applications</NavLink>
         }
-        <NavLink to="/asd" className="px-2"> about</NavLink>
-        <NavLink to="/gdsfgs" className="px-2"> good</NavLink>
+        <NavLink to="/posted-jobs" className="px-2">Posted-Jobs</NavLink>
+        <NavLink to="/add-job" className="px-2">Add-Job</NavLink>
     </>
     return (
         <div className="navbar bg-base-100">
