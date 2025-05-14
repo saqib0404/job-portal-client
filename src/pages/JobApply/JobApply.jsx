@@ -23,7 +23,7 @@ const JobApply = () => {
             githubUrl
         }
 
-        fetch(`http://localhost:5000/job-apply`, {
+        fetch(`https://job-portal-server-three-gamma.vercel.app/job-apply`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(applicantInfo)

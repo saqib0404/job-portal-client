@@ -34,12 +34,12 @@ const AuthProvider = ({ children }) => {
             setCurrentUser(user);
 
             if (user?.email) {
-                axios.post("http://localhost:5000/jwt",
+                axios.post("https://job-portal-server-three-gamma.vercel.app/jwt",
                     { user: user.email }, { withCredentials: true }
-                ).then(({ data }) => console.log(data))
+                ).then(({ data }) => { })
             } else {
-                axios.post('http://localhost:5000/logout', {}, { withCredentials: true })
-                    .then(({ data }) => console.log(data))
+                axios.post('https://job-portal-server-three-gamma.vercel.app/logout', {}, { withCredentials: true })
+                    .then(({ data }) => { })
             }
 
             setLoading(false)

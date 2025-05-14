@@ -13,7 +13,7 @@ const SignIn = () => {
     const handleSignInWithGooglePopUp = () => {
         signInWithGooglePopUp()
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
                 Swal.fire({
                     title: "Logged In",
                     icon: "success",
@@ -30,7 +30,7 @@ const SignIn = () => {
             .then(result => {
                 setError("")
                 form.reset()
-                console.log(result);
+                // console.log(result);
                 Swal.fire({
                     title: "Logged In",
                     icon: "success",

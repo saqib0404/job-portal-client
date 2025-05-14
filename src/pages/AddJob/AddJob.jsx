@@ -17,7 +17,7 @@ const AddJob = () => {
      newJob.requirements = requirements.split('\n')
      newJob.hr_email = currentUser.email
      
-      fetch(`http://localhost:5000/jobs`,{
+      fetch(`https://job-portal-server-three-gamma.vercel.app/jobs`,{
         method:"POST",
         headers: {
           'Content-Type': 'application/json'

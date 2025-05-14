@@ -30,7 +30,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/job/:id",
-                loader: ({ params }) => fetch(`http://localhost:5000/job/${params.id}`),
+                loader: ({ params }) => fetch(`https://job-portal-server-three-gamma.vercel.app/job/${params.id}`),
                 element: <PrivateRoute><JobDetails /></PrivateRoute>
             },
             {
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/posted-jobs/:job_id",
-                loader:({params})=>fetch(`http://localhost:5000/posted-jobs/${params.job_id}`),
+                loader:({params})=>fetch(`https://job-portal-server-three-gamma.vercel.app/posted-jobs/${params.job_id}`),
                 element: <PrivateRoute><Applicants /></PrivateRoute>
             },
             {
